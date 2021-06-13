@@ -25,9 +25,9 @@ class Middleware <Request, Response> extends Array {
     request: Request,
     response: Response,
     last?: NextFunc,
-    index: number = 0,
-    done: boolean = false,
-    called: boolean = false,
+    index = 0,
+    done = false,
+    called = false,
     fn?: MiddlewareFunc<Request, Response>
   ) {
     /* istanbul ignore next */
