@@ -1,8 +1,9 @@
 import { expect } from 'chai'
 import Middleware from '../src'
 
-describe('compose', () => {
-  let context
+describe('middleware', () => {
+  // TODO: to fix these unkonwn types.
+  let context: Middleware<unknown, unknown>
 
   beforeEach(() => {
     context = new Middleware()
@@ -16,7 +17,7 @@ describe('compose', () => {
 
   it('middleware compose should return result and not throws', () => {
     const middleware = context
-    expect(() => middleware.compose()).to.not.throws()
+    expect(() => middleware.compose(null, null)).to.not.throws()
   })
 
   it('middleware compose should return result and throws', () => {
