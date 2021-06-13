@@ -8,14 +8,28 @@
 'use strict'
 
 /**
+ * decalre types.
+ */
+
+export type NextFunc = () => Promise<any>;
+export type MiddlewareFunc<Request, Response> = (request: Request, response: Response, next: NextFunc) => any
+
+/**
  * modern middleware composition.
  *
  * @param {Object} options
  * @api public
  */
-class Middleware extends Array {
-
-  next (request, response, last, index = 0, done = false, called = false, fn?) {
+class Middleware <Request, Response> extends Array {
+  #next (
+    request: Request,
+    response: Response,
+    last?: NextFunc,
+    index: number = 0,
+    done: boolean = false,
+    called: boolean = false,
+    fn?: MiddlewareFunc<Request, Response>
+  ) {
     /* istanbul ignore next */
     if ((done = index > this.length)) return
 
@@ -24,13 +38,13 @@ class Middleware extends Array {
     return fn && fn(request, response, () => {
       if (called) throw new Error('next() called multiple times')
       called = true
-      return Promise.resolve(this.next(request, response, last, index + 1))
+      return Promise.resolve(this.#next(request, response, last, index + 1))
     })
   }
 
-  compose (request, response, last) {
+  compose (request: Request, response: Response, last?: NextFunc) {
     try {
-      return Promise.resolve(this.next(request, response, last))
+      return Promise.resolve(this.#next(request, response, last))
     } catch (err) {
       return Promise.reject(err)
     }
@@ -38,7 +52,7 @@ class Middleware extends Array {
 }
 
 /**
-* Expose `Middleware`.
-*/
+ * Expose `Middleware`.
+ */
 
 export default Middleware
