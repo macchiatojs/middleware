@@ -1,5 +1,5 @@
 /**
- * @3imed-jaberi/middleware
+ * @macchiatojs/middleware
  *
  * Copyright(c) 2021 Imed Jaberi
  * MIT Licensed
