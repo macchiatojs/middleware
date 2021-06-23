@@ -1,20 +1,20 @@
-# agnostic-middleware
+# @macchiatojs/middleware
 
-The Modern (ES6) and **Express-Style** Middleware Composition.
+The modern **Express-Style** middleware composition.
 
 ## `Installation`
 
 ```bash
 # npm
-$ npm install agnostic-middleware
+$ npm install @macchiatojs/middleware
 # yarn
-$ yarn add agnostic-middleware
+$ yarn add @macchiatojs/middleware
 ```
 
 ## `Usage`
 
 ```typescript
-import Middleware from "agnostic-middleware";
+import Middleware from "@macchiatojs/middleware";
 
 const middleware = new Middleware();
 
